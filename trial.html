@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Dynamic Calendar JavaScript | CodingNepal</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Font Link for Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <script src="script.js" defer></script>
+    <style>
+        /* Import Google font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+.wrapper{
+  width: 450px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+}
+.wrapper header{
+  display: flex;
+  align-items: center;
+  padding: 25px 30px 10px;
+  justify-content: space-between;
+}
+header .icons{
+  display: flex;
+}
+header .icons span{
+  height: 38px;
+  width: 38px;
+  margin: 0 1px;
+  cursor: pointer;
+  color: #878787;
+  text-align: center;
+  line-height: 38px;
+  font-size: 1.9rem;
+  user-select: none;
+  border-radius: 50%;
+}
+.icons span:last-child{
+  margin-right: -10px;
+}
+header .icons span:hover{
+  background: #f2f2f2;
+}
+header .current-date{
+  font-size: 1.45rem;
+  font-weight: 500;
+}
+.calendar{
+  padding: 20px;
+}
+.calendar ul{
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  text-align: center;
+}
+.calendar .days{
+  margin-bottom: 20px;
+}
+.calendar li{
+  color: #333;
+  width: calc(100% / 7);
+  font-size: 1.07rem;
+}
+.calendar .weeks li{
+  font-weight: 500;
+  cursor: default;
+}
+.calendar .days li{
+  z-index: 1;
+  cursor: pointer;
+  position: relative;
+  margin-top: 30px;
+}
+.days li.inactive{
+  color: #aaa;
+}
+.days li.active{
+  color: #fff;
+}
+.days li::before{
+  position: absolute;
+  content: "";
+  left: 50%;
+  top: 50%;
+  height: 40px;
+  width: 40px;
+  z-index: -1;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.days li.active::before{
+  background: #9B59B6;
+}
+.days li:not(.active):hover::before{
+  background: #f2f2f2;
+}
+
+
+
+
+.side-box {
+    flex: 1;
+    padding: 20px;
+    background: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    display: none; /* initially hide the side box */
+  }
+
+  .side-box h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .side-box .content {
+    margin-top: 10px;
+  }
+
+
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <p class="current-date"></p>
+        <div class="icons">
+          <span id="prev" class="material-symbols-rounded">chevron_left</span>
+          <span id="next" class="material-symbols-rounded">chevron_right</span>
+        </div>
+      </header>
+      <div class="calendar">
+        <ul class="weeks">
+          <li>Sun</li>
+          <li>Mon</li>
+          <li>Tue</li>
+          <li>Wed</li>
+          <li>Thu</li>
+          <li>Fri</li>
+          <li>Sat</li>
+        </ul>
+        <ul class="days"></ul>
+      </div>
+    </div>
+
+    <div class="side-box" id="sideBox">
+        <h2>Event Details</h2>
+        <div class="content" id="eventDetails"></div>
+      </div>
+    
+  </body>
+  <script>
+    
+
+  const daysTag = document.querySelector(".days"),
+  currentDate = document.querySelector(".current-date"),
+  prevNextIcon = document.querySelectorAll(".icons span"),
+  eventDetails = document.getElementById("eventDetails"),
+  sideBox = document.getElementById("sideBox");
+
+const nepaliEventsApiUrl = "https://nepali-events-api.vercel.app/api/events";
+const volunteeringActivitiesApiUrl = "https://www.boredapi.com/api/activity?type=volunteer";
+
+// Function to fetch data from an API
+const fetchData = async (url) => {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return null;
+  }
+};
+
+// Sample data (replace with actual data or fetch from APIs)
+const eventData = {
+  "2024-01-25": {
+    nepaliDate: "Dashain Start",
+  },
+  // Add more dates as needed
+};
+
+// Function to update the side box content
+const updateSideBox = async (date) => {
+  const nepaliEventData = eventData[date];
+
+  if (nepaliEventData) {
+    // Fetch volunteering activity
+    const volunteeringActivityData = await fetchData(volunteeringActivitiesApiUrl);
+
+    eventDetails.innerHTML = `
+      <p><strong>Nepali Date:</strong> ${nepaliEventData.nepaliDate}</p>
+      <p><strong>Volunteering Activity:</strong> ${volunteeringActivityData.activity}</p>
+    `;
+    sideBox.style.display = "block";
+  } else {
+    sideBox.style.display = "none";
+  }
+};
+
+
+
+
+
+
+
+
+// getting new date, current year and month
+let date = new Date(),
+currYear = date.getFullYear(),
+currMonth = date.getMonth();
+
+// storing full name of all months in array
+const months = ["January", "February", "March", "April", "May", "June", "July",
+          "August", "September", "October", "November", "December"];
+
+const renderCalendar = () => {
+let firstDayofMonth = new Date(currYear, currMonth, 1).getDay(), // getting first day of month
+lastDateofMonth = new Date(currYear, currMonth + 1, 0).getDate(), // getting last date of month
+lastDayofMonth = new Date(currYear, currMonth, lastDateofMonth).getDay(), // getting last day of month
+lastDateofLastMonth = new Date(currYear, currMonth, 0).getDate(); // getting last date of previous month
+let liTag = "";
+
+for (let i = firstDayofMonth; i > 0; i--) { // creating li of previous month last days
+    liTag += `<li class="inactive">${lastDateofLastMonth - i + 1}</li>`;
+}
+
+for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
+    // adding active class to li if the current day, month, and year matched
+    let isToday = i === date.getDate() && currMonth === new Date().getMonth() 
+                 && currYear === new Date().getFullYear() ? "active" : "";
+    liTag += `<li class="${isToday}">${i}</li>`;
+}
+
+for (let i = lastDayofMonth; i < 6; i++) { // creating li of next month first days
+    liTag += `<li class="inactive">${i - lastDayofMonth + 1}</li>`
+}
+currentDate.innerText = `${months[currMonth]} ${currYear}`; // passing current mon and yr as currentDate text
+daysTag.innerHTML = liTag;
+}
+renderCalendar();
+
+prevNextIcon.forEach(icon => { // getting prev and next icons
+icon.addEventListener("click", () => { // adding click event on both icons
+    // if clicked icon is previous icon then decrement current month by 1 else increment it by 1
+    currMonth = icon.id === "prev" ? currMonth - 1 : currMonth + 1;
+
+    if(currMonth < 0 || currMonth > 11) { // if current month is less than 0 or greater than 11
+        // creating a new date of current year & month and pass it as date value
+        date = new Date(currYear, currMonth, new Date().getDate());
+        currYear = date.getFullYear(); // updating current year with new date year
+        currMonth = date.getMonth(); // updating current month with new date month
+    } else {
+        date = new Date(); // pass the current date as date value
+    }
+    renderCalendar(); // calling renderCalendar function
+});
+});
+
+
+
+// Modify the loop inside renderCalendar to include event handling
+for (let i = 1; i <= lastDateofMonth; i++) {
+  let isToday = i === date.getDate() && currMonth === new Date().getMonth()
+    && currYear === new Date().getFullYear() ? "active" : "";
+
+  // Check if there are events for this day
+  const eventText = events[`${currYear}-${currMonth + 1}-${i < 10 ? '0' : ''}${i}`];
+  const eventClass = eventText ? "has-event" : "";
+
+  liTag += `<li class="${isToday} ${eventClass}" onclick="updateSideBox('${currYear}-${currMonth + 1}-${i < 10 ? '0' : ''}${i}')">${i}`;
+
+  if (eventText) {
+    liTag += `<div class="event-tooltip">${eventText.join('<br>')}</div>`;
+  }
+
+  liTag += `</li>`;
+}
+
+// Add a function to show events for a specific day
+const showEvents = (day) => {
+  const eventDate = new Date(currYear, currMonth, day);
+  const dateString = eventDate.toISOString().split('T')[0];
+
+  const dayEvents = events[dateString];
+  if (dayEvents && dayEvents.length > 0) {
+    alert(`Events for ${months[currMonth]} ${day}, ${currYear}:\n${dayEvents.join('\n')}`);
+  } else {
+    alert(`No events for ${months[currMonth]} ${day}, ${currYear}.`);
+  }
+};
+  </script>
+</html>

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+    <style>
+    nav {
+        &.primary-navigation {
+          margin: 0 auto;
+          display: block;
+        
+           
+          text-align: center;
+          font-size: 16px;
+      
+          ul li {
+            list-style: none;
+            margin: 0 auto;
+            border-left: 2px solid #3ca0e7;
+            display: inline-block;
+            padding: 0 30px;
+            position: relative;
+            text-decoration: none;
+            text-align: center;
+            font-family: arvo;
+          }
+      
+          li a {
+            color: black;
+          }
+      
+          li a:hover {
+            color: #3ca0e7;
+          }
+      
+          li:hover {
+            cursor: pointer;
+          }
+      
+          ul li ul {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+      padding-left: 0;
+            left: 0;
+            display: none;
+            background: white;
+          }
+      
+          ul li:hover > ul,
+          ul li ul:hover {
+            visibility: visible;
+            opacity: 1;
+            display: block;
+            min-width: 250px;
+            text-align: left;
+            
+            box-shadow: 0px 3px 5px -1px #ccc;
+          }
+      
+          ul li ul li {
+            clear: both;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 20px;
+            border-style: none;
+          }
+      
+          ul li ul li a:hover {
+            padding-left: 10px;
+            border-left: 2px solid #3ca0e7;
+            transition: all 0.3s ease;
+          }
+        }
+      }
+      
+      a {
+      
+          text-decoration: none;
+      
+          &:hover {
+              color: #3CA0E7;
+          }
+       
+      }
+      
+       ul li ul li a { transition: all 0.5s ease; }
+      
+
+       .culturalmainphoto{
+        background-image: url(img/nature.jpg);
+        background-size: cover;
+        width: 100%;
+        height: 90vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-family: cursive;
+        font-size: 30px;
+        color: white;
+        text-shadow: 2px 2px 5px rgb(0, 0, 0);
+       }
+
+
+       /* Follow me for more pens like this! */
+
+/* Tweak to change the look and feel */
+:root {
+  --button-background: dodgerblue;
+  --button-color: white;
+  
+  --dropdown-highlight: dodgerblue;
+  --dropdown-width: 160px;
+  --dropdown-background: rgb(177, 167, 167);
+  --dropdown-color: rgb(52, 52, 52);
+}
+
+/* Center the planet */
+.dropdowncontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+/* Boring button styles */
+a.button {
+  /* Frame */
+  display: inline-block;
+  padding: 20px 28px;
+  border-radius: 50px;
+  box-sizing: border-box;
+  
+  /* Style */
+  border: none;
+  background: var(--button-background);
+  color: var(--button-color);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+a.button:active {
+  filter: brightness(75%);
+}
+
+/* Dropdown styles */
+.dropdown {
+  position: relative;
+  padding: 0;
+  margin-right: 1em;
+  
+  border: none;
+}
+
+.dropdowncontainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 30px;
+}
+
+.dropdown summary {
+  list-style: none;
+  list-style-type: none;
+}
+
+.dropdown > summary::-webkit-details-marker {
+  display: none;
+}
+
+.dropdown summary:focus {
+  outline: none;
+}
+
+.dropdown summary:focus a.button {
+  border: 2px solid white;
+}
+
+.dropdown summary:focus {
+  outline: none;
+}
+
+.dropdown ul {
+  position: absolute;
+  margin: 20px 0 0 0;
+  padding: 20px 0;
+  width: var(--dropdown-width);
+  left: 50%;
+  margin-left: calc((var(--dropdown-width) / 2)  * -1);
+  box-sizing: border-box;
+  z-index: 2;
+  
+  background: var(--dropdown-background);
+  border-radius: 6px;
+  list-style: none;
+}
+
+.dropdown ul li {
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown ul li a:link, .dropdown ul li a:visited {
+  display: inline-block;
+  padding: 10px 0.8rem;
+  width: 100%;
+  box-sizing: border-box;
+  
+  color: var(--dropdown-color);
+  text-decoration: none;
+}
+
+.dropdown ul li a:hover {
+  background-color: var(--dropdown-highlight);
+  color: var(--dropdown-background);
+}
+
+/* Dropdown triangle */
+.dropdown ul::before {
+  content: ' ';
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: -10px;
+  left: 50%;
+  margin-left: -10px;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent var(--dropdown-background) transparent;
+}
+
+
+/* Close the dropdown with outside clicks */
+.dropdown > summary::before {
+  display: none;
+}
+
+.dropdown[open] > summary::before {
+    content: ' ';
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+      </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+          <div class="headerbox">
+            <div class="leftheadergang"><img class="logoimg" src="img/logo.png" alt=""></div>
+
+            <div>
+                <form onsubmit="event.preventDefault();" role="search">
+                  <label for="search">Search for stuff</label>
+                  <input id="search" type="search" placeholder="Search..." autofocus required />
+                  <button type="submit">Go</button>
+                </form>
+              </div>
+            
+            <div class="mainicons">
+                <div id="mainfeat" class="trips">Trips</div>
+                <div id="mainfeat" class="calender">fest-eve-Calander</div>
+                <div id="mainfeat" class="help">Helpline</div>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+     
+
+<nav role="navigation" class="primary-navigation">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#">hotel</a></li>
+    <li><a href="#">Commute</a></li>
+    <li><a href="#">Itinery</a></li>
+    <li><a href="#">Flight</a></li>
+    <li><a href="#">Guide</a></li>
+    <li><a href="#">.... &dtrif;</a>
+        <ul class="dropdown">
+          <li><a href="#">Recommended</a></li>
+          <li><a href="#">Trips</a></li>
+          <li><a href="#">Fest-eve Calander</a></li>
+          <li><a href="#">Helpline</a></li>
+        </ul>
+      </li>
+  </ul>
+</nav>
+
+
+<section>
+    <div class="culturalmainphoto">
+        
+    <div>Traveler's top destinations</div>
+    <div>Check out the best destination by the data of Nepal Tourism Board in Nepal</div>
+        
+    </div>
+</section>
+
+<section>
+    <div class="dropdowncontainer">
+    <div><details class="dropdown">
+        <summary role="button">
+          <a class="button">Click on me!</a>
+        </summary>
+        <ul>
+          <li><a href="#">I'm a dropdown.</a></li>
+          <li><a href="#">In Pure CSS</a></li>
+          <li><a href="#">As in...</a></li>
+          <li><a href="#">No JavaScript.</a></li>
+          <li><a href="#">At All.</a></li>
+      </ul>
+    </details>
+    </div>
+    <div class="buttonbox">Trending destination</div>
+    <div class="buttonbox">Top destination</div>
+    <div class="buttonbox">Food destination</div>
+    <div class="buttonbox">More</div>
+    </div>
+</section>
+     
+   
+
+    
+
+  
+
+    
+   
+</body>
+<script src="script.js"></script>
+
+
+  
+</html>

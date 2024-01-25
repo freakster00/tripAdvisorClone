@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+</head>
+<style>
+#recommendation{
+  background-color: aqua;
+  height: 500px;
+  width: 650px;
+  position: relative;
+  left:460px;
+  top:10px;
+  display: none;
+}
+
+</style>
+<body>
+    <header>
+        <nav>
+          <div class="headerbox">
+            <div class="leftheadergang"><img class="logoimg" src="img/logo.png" alt=""></div>
+            
+            <div class="mainicons">
+                <div id="mainfeat" class="trips">Trips</div>
+                <div id="mainfeat" class="calender">fest-eve-Calander</div>
+                <div id="mainfeat" class="help">Helpline</div>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <section id="mySectionMain">
+        <div>
+            <div class="bigtextcontent">Where to?</div>
+            <div class="majorcontentsearch">
+                <div class="contentsearch" id="searchall" onclick="myFunction__('searchall')"> <i class="fa-solid fa-vector-square"></i>Search all</div>
+                <div class="contentsearch" id="hotel" onclick="myFunction__('hotel')"><i class="fa-solid fa-hotel"></i>Hotel</div>
+                <div class="contentsearch" id="commute" onclick="myFunction__('commute')"><i class="fa-solid fa-car-side"></i>Commute</div>
+                <div class="contentsearch" id="itinery" onclick="myFunction__('itinery')"><i class="fa-solid fa-clipboard-list"></i>Itinery</div>
+                <div class="contentsearch" id="flight" onclick="myFunction__('flight')"> <i class="fa-solid fa-jet-fighter"></i>Flight</div>
+                <div class="contentsearch" id="guide" onclick="myFunction__('guide')"> <i class="fa-solid fa-compass"></i>Guide</div>
+            </div>
+            <div>
+            <form class="search-container">
+                <input type="text" id="search-bar" placeholder="What can I help you with today?" onclick="showRecommendation()">
+                <a href="#"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png" onclick="handleSubmit()"></a>
+              </form>
+              <div id="recommendation">
+                <span id="close-tab" style="font-size:50px;">X</span>
+                <ul>
+                  <li>Recommendation 1</li>
+                  <li>Recommendation 2</li>
+                  <li>Recommendation 3</li>
+                  <li>Recommendation 4</li>
+                  <li>Recommendation 5</li>
+                </ul>
+              </div>
+            </div>
+        </div>
+      
+        <img class="mt"  src="img/mt.png" alt="">
+      
+    </section>
+   
+
+    <section class="contentsection">
+        <div>
+            <div class="secheadtext">Take a trip to a traveler fave</div>
+            <div class="secheadsubtext">Travelers' Choice Best of the Best Destinations</div>
+        </div>
+        <div class="destincontainer"> 
+            <div class="destinbox top"><a href="top.html">Top destinations</a></div>
+            <div class="destinbox trending"><a href="trending.html">Trending destinations</a></div>
+            <div class="destinbox food"><a href="food.html">Food destinations</a></div>
+            <div class="destinbox cultural"><a href="culturaldestin.html">Cultural destinations</a></div>
+        </div>
+        <div class="destincontainer">
+            <div class="destinbox adventure"><a href="adventure.html">Adventure destination</a></div>
+            <div class="destinbox nature"><a href="nature.html">Nature destination</a></div>
+            <div class="destinbox historical"><a href="history.html">Historical destination</a></div>
+            <div class="destinbox religious"><a href="religious.html">Religious destination</a></div>
+        </div> 
+    </section>
+
+<section>
+    <div class="wrapper">
+        <header>
+          <p class="current-date"></p>
+          <div class="icons">
+            <span id="prev" class="material-symbols-rounded">chevron_left</span>
+            <span id="next" class="material-symbols-rounded">chevron_right</span>
+          </div>
+        </header>
+        <div class="calendar">
+          <ul class="weeks">
+            <li>Sun</li>
+            <li>Mon</li>
+            <li>Tue</li>
+            <li>Wed</li>
+            <li>Thu</li>
+            <li>Fri</li>
+            <li>Sat</li>
+          </ul>
+          <ul class="days"></ul>
+        </div>
+      </div>
+
+      
+        <div class="side-box" id="sideBox">
+          <h2>Event Details</h2>
+          <div class="content" id="eventDetails"></div>
+        </div>
+    </section>   
+
+
+  
+
+    
+   
+</body>
+<script>
+  
+  // document.getElementById("hotel").onclick = function() {myFunction("hotel")};
+
+function myFunction__(mode) {
+  // document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
+  const location_="http://127.0.0.1:5501" +"?mode="+ mode
+  window.location.replace(location_);
+  // alert(location_)
+}
+function handleSubmit() {
+    // event.preventDefault(); // Prevent the form from submitting in the traditional way
+
+    // // Get form values
+    var searchData = document.getElementById('search-bar').value;
+    const searchParams = new URLSearchParams(window.location.search);
+
+    var mode=searchParams.get('mode'); // price_descending
+    const location_="http://127.0.0.1:5501/" +mode+"/"+searchData+".html"
+    document.getElementById('search-bar').value=" "
+    window.location.replace(location_);
+    // // Do something with the form values
+
+    // console.log(mode);
+    
+}
+
+function showRecommendation(){
+        var myDiv = document.getElementById('recommendation');
+        var mySectionMain = document.getElementById('close-tab');
+        myDiv.style.display = 'block';
+        myDiv.style.borderRadius = '10px';
+        mySectionMain.addEventListener('click', function() {
+          myDiv.style.display = 'none';
+            });
+        
+}
+</script>
+<script src="script.js"></script>
+
+
+  
+</html>
