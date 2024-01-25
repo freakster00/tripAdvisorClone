@@ -171,3 +171,21 @@ a:hover:after {
 /* .airline-reviews {
     
 } */
+
+
+.random-text {
+    font-family: sans-serif;
+    position: relative;
+    top: 40px;
+    left: 10px;
+}
+
+.random-text p {
+    color: black;
+    font-size: 14px;
+}
+
+.random-text h1 {
+    color: black;
+    font-size: 20px;
+}
