@@ -1,0 +1,173 @@
+*,
+*:before,
+*:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: white;
+}
+
+
+
+.TheDiv {
+    padding: 30px;
+    background-color: gray;
+    background-image: url(img/bhaktapur.jpg);
+    height: 300px;
+}
+
+.nava {
+    height: 10vh;
+    width: 40vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+}
+
+a {
+    position: relative;
+    text-decoration: none;
+    color: white;
+    font-family: sans-serif;
+    font-size: 18px;
+    letter-spacing: 0.5px;
+    padding: 0 10px;
+}
+
+a:after {
+    content: "";
+    position: absolute;
+    background-color: white;
+    height: 3px;
+    width: 0%;
+    left: 0;
+    bottom: -10px;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: #fff;
+}
+
+a:hover:after {
+    width: 100%;
+}
+
+.big-text {
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    font-size: 30px;
+}
+
+.finding-flights {
+    display: flex;
+    border-radius: 40px;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+}
+
+.wheretowhere {
+    border-radius: 40px;
+    list-style-type: none;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+    margin: auto;
+    align-items: center;
+}
+
+.wtwcontent {
+    float: left;
+    align-items: center;
+}
+
+.wtwcontent a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 13px 16px;
+    text-decoration: none;
+    align-items: center;
+}
+
+.wtwcontent a input {
+    font-size: 18px;
+    width: 90px;
+    
+}
+
+
+
+.preferance {
+    display: flex;
+    margin: auto;
+    background-color: white;
+    width: 40%;
+    height: 30%;
+    padding: 10px;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+
+
+.topnavul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+
+.topnavul li {
+    float: left;
+}
+
+.topnavul li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.topnavul li a:hover {
+    background-color: #33eeff;
+    border-radius: 20px;
+}
+
+.search input[type=text] {
+    width: 250px;
+    height: 25px;
+    border: none;
+    border-radius: 25px;
+    padding: 18px 20px;
+    color: black;
+}
+
+.search {
+    float: right;
+    margin: 7px;
+}
+
+/* .search button {
+    background-color: ;
+    color: #f2f2f2;
+    float: right;
+    padding: 5px 10px;
+    margin-right: 16px;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+} */
+
+.airline-reviews {
+    
+}
